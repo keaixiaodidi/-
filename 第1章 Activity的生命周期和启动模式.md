@@ -5,7 +5,7 @@
 1. onCreate
 2. onStart
 3. onResume
-4. onPause
+4. onPause（onPause必须先执行完，新Activity的onResume才会执行）
 5. onStop
 6. onDestroy
 7. onReStart
