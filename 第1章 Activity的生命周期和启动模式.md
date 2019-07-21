@@ -99,7 +99,7 @@
 > 谁启动了这个Activity，这个Activity就运行在启动它的那个Activity所在栈中。若用非Activity类型的Context（如ApplicationContext）启动Activity，会crash，因为非Activit的Context没有所谓的任务栈。解决问题的方法是为待启动的Activity指定FLAG_ACTIVITY_NEW_TASK标记位，这样启动时会为它创建一个新的任务栈，此时待启动Activity实际上是以singleTask模式启动的。
 2. SingleTop：栈顶复用模式
 > 若位于栈顶，不会被重新创建，onNewIntent会回调。不位于栈顶，则重新创建。
-3. SingleTask：站内复用模式
+3. SingleTask：栈内复用模式
 > 只要Activity在一个栈中存在，多次启动都不会重新创建实例。会回调onNewIntent。当一个具有SingleTask模式的Activity  A请求启动，系统会先寻找是否存在A想要的任务栈，如果不存在，则创建一个任务栈，再创建A的实例并把A方法栈中；如存在任务栈，看栈中是否有实例存在，如果有，则调到栈顶，回调onNewIntent，如果实例不存在，就创建A并压入栈中。
 4. SingleInstance：单实例模式
 
@@ -127,4 +127,4 @@
 > 匹配过滤表，需要同时匹配过滤列表中的action、category、data信息，否则匹配失败。一个Activity中可以有多个intent-filter，一个intent只要能匹配任何一组intent-filter即可成功启动对应的Activity。
 1. action：action的匹配要求intent中的action存在且必须和过滤规则中的其中一个action相同
 2. category：intent可以没有category，如果一旦有category，不管有几个，每个都要能够和过滤规则中的任何一个category相同。为了activity能接收隐式调用，就必须在intent-filter中指定“Android.intent.category.DEFAULT”这个category。
-3. data：如果过滤规则中定义了data，那么intent中IXUS也要定义可匹配的data。data由两部分组成，mimeType和URI。mimeTyle指媒体类型。
+3. data：如果过滤规则中定义了data，那么intent中也要定义可匹配的data。data由两部分组成，mimeType和URI。mimeTyle指媒体类型。
